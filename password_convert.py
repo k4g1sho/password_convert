@@ -22,7 +22,10 @@ for element in range(2, len(raw_data)):
         string_ = raw_data[element].split(',')[count]
         # Add key and remove the string ""
         # Escape to escape speacial characters such as "" \ etc into xml
-        temp+=f'<{key}>{escape(string_[1:-1])}</{key}>'
+        if count == 0: # Remove the html on the server and only leave the website
+            temp+=f'<{key}>{escape(string_[9:-1])}</{key}>'
+        else:
+            temp+=f'<{key}>{escape(string_[1:-1])}</{key}>'
         count+=1
         temp_entry = f'<entry>{temp}</entry>'
     password_entries += temp_entry
